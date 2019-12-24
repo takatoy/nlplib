@@ -13,7 +13,7 @@ pytest-cov = "*"
 flake8 = "*"
 
 [packages]
-torch = "*"
+torch = "==1.2.0"
 nltk = "*"
 nlplib = {editable = true,path = "."}
 loguru = "*"

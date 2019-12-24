@@ -7,15 +7,11 @@ class Vocab:
         word2id=DEFAULT_SP_TOKENS,
         pad_token="<pad>",
         unk_token="<unk>",
-        bos_token="<s>",
-        eos_token="</s>",
         cased=False,
     ):
         self.word2id = dict(word2id)
         self.pad_token = pad_token
         self.unk_token = unk_token
-        self.bos_token = bos_token
-        self.eos_token = eos_token
         self.cased = cased
 
         self.word2id.setdefault(unk_token, len(self.word2id))
@@ -23,8 +19,6 @@ class Vocab:
 
         self.pad_idx = self.word2id[self.pad_token]
         self.unk_idx = self.word2id[self.unk_token]
-        self.bos_idx = self.word2id[self.bos_token]
-        self.eos_idx = self.word2id[self.eos_token]
 
         self.n_unk = 0
 

@@ -1,1 +1,1 @@
-# nlplib
+# NLP utility library
