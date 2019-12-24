@@ -5,7 +5,7 @@ with open("requirements.txt") as f:
 
 setup(
     name="nlplib",
-    version="0.0.0",
+    version="0.0.1",
     packages=find_packages(),
     install_requires=reqs.strip().split("\n"),
 )
