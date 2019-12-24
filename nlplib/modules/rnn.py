@@ -14,6 +14,6 @@ class RnnModule(nn.Module):
             input_size, hidden_size, num_layers=num_layers, bidirectional=bidirectional,
         )
 
-    def forward(self, x, h, ys=None):
+    def forward(self, x, h):
         x, h = self.rnn(x, h)
         return x, h
