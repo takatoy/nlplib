@@ -1,20 +1,29 @@
-DEFAULT_SP_TOKENS = {"<pad>": 0, "<unk>": 1, "<s>": 2, "</s>": 3}
+DEFAULT_SP_TOKENS = [
+    ("pad_token", "<pad>"),
+    ("unk_token", "<unk>"),
+    ("bos_token", "<s>"),
+    ("eos_token", "</s>"),
+]
 
 
 class Vocab:
     def __init__(
-        self,
-        word2id=DEFAULT_SP_TOKENS,
-        pad_token="<pad>",
-        unk_token="<unk>",
-        cased=False,
+        self, sp_tokens=DEFAULT_SP_TOKENS, cased=False,
     ):
-        self.word2id = dict(word2id)
-        self.pad_token = pad_token
-        self.unk_token = unk_token
+        self.word2id = {}
+
+        for i, token in enumerate(sp_tokens):
+            self.word2id[token[1]] = i
+            setattr(self, token[0], token[1])
+
+        if not hasattr(self, "pad_token") or not hasattr(self, "unk_token"):
+            raise ValueError(
+                "'pad_token' and 'unk_token' must be set to special tokens"
+            )
+
         self.cased = cased
 
-        self.word2id.setdefault(unk_token, len(self.word2id))
+        self.word2id.setdefault(self.unk_token, len(self.word2id))
         self.id2word = {v: k for k, v in self.word2id.items()}
 
         self.pad_idx = self.word2id[self.pad_token]
