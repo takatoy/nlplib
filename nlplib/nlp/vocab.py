@@ -10,16 +10,17 @@ class Vocab:
     def __init__(
         self, sp_tokens=DEFAULT_SP_TOKENS, cased=False,
     ):
+        self.cased = cased
         self.word2id = {}
 
-        for i, token in enumerate(sp_tokens):
-            self.word2id[token[1]] = i
-            setattr(self, token[0], token[1])
+        for i, (name, token) in enumerate(sp_tokens):
+            if not self.cased:
+                token = token.lower()
+            self.word2id[token] = i
+            setattr(self, name, token)
 
         if not hasattr(self, "unk_token"):
             raise ValueError("'unk_token' must be set to special tokens")
-
-        self.cased = cased
 
         self.word2id.setdefault(self.unk_token, len(self.word2id))
         self.id2word = {v: k for k, v in self.word2id.items()}
